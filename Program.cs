@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Args;
+using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace BotCode
@@ -33,6 +34,11 @@ namespace BotCode
                     await client.SendTextMessageAsync(msg.Chat.Id, "Перейдите в экран 'Macro' найдите параметр под номером '536'" +
                         " и измените его значение в зависимости от строны подреза .Если подрез находится со стороны оператора то " +
                         "от имеющегося числа отнимаем приблизительно 0.02 ,если подрез находится с внутренней стороны то прибавляем 0.02. ");
+                    await client.SendPhotoAsync(
+                        chatId: e.Message.Chat.Id,
+                        photo: "https://github.com/dmitryselyundyaev/Telegram-bot-for-cnc-operator/blob/master/ImgSource/%D0%9F%D0%BE%D0%B4%D1%80%D0%B5%D0%B7.jpg?raw=true",
+                        caption: "Визуальный пример",
+                        parseMode: ParseMode.Html);
                     break;
                 case "Как поменять натяг?":
                     Thread.Sleep(500);

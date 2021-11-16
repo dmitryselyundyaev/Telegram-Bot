@@ -11,7 +11,7 @@ namespace BotCode
   
     class Program
     {
-        private static string token = "2137978160:AAFkVESZCbDJykCOtgwUlpB0fLOTG6XQqc4";
+        private static string token = "";
         private static TelegramBotClient client;
         static void Main(string[] args)
         {
@@ -54,20 +54,20 @@ namespace BotCode
                     Thread.Sleep(500);
                     await client.SendTextMessageAsync(msg.Chat.Id, InsertRns);
                     break;
-                //case "Позвонить наладчику":
-                //    Thread.Sleep(2000);
-                //    await client.SendContactAsync(
-                //     chatId: e.Message.Chat.Id,
-                //     phoneNumber: "+79108926865",
-                //     firstName: "Максим",
-                //     lastName: "Петрович");
-                //    Thread.Sleep(500);
-                //    await client.SendContactAsync(
-                //     chatId: e.Message.Chat.Id,
-                //     phoneNumber: "+79108926088",
-                //     firstName: "Антон",
-                //     lastName: "Сергеевич");
-                //    break;
+                case "Позвонить наладчику":
+                    Thread.Sleep(2000);
+                    await client.SendContactAsync(
+                     chatId: e.Message.Chat.Id,
+                     phoneNumber: "+79108926865",
+                     firstName: "Максим",
+                     lastName: "Петрович");
+                    Thread.Sleep(500);
+                    await client.SendContactAsync(
+                     chatId: e.Message.Chat.Id,
+                     phoneNumber: "+79108926088",
+                     firstName: "Антон",
+                     lastName: "Сергеевич");
+                    break;
                 case "Номера ремонтных служб":
                     Thread.Sleep(500);
                     await client.SendTextMessageAsync(msg.Chat.Id, " + 7-923-442-39-12 Механники \r\n + 7-923-442-39-51 Электрики \r\n + 7-923-111-33-39 Автоматчики", replyMarkup: MainButtons());

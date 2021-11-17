@@ -25,7 +25,7 @@ namespace BotCode
         private static async void onMessageHandler(object sender, MessageEventArgs e)
         {
             string StepRns, StandofRns, TaperRns, InsertRns;
-            Answers(out StepRns, out StandofRns, out TaperRns, out InsertRns);
+            Answers(out StepRns, out StandofRns, out TaperRns, out InsertRns, out string Mzs1, out string Mzs2, out string Mzs3, out string Mzs4);
             var msg = e.Message;
             if (msg.Text == "/start")
             {
@@ -33,6 +33,14 @@ namespace BotCode
             }
             switch (msg.Text)
             {
+                case "МЗС":
+                    Thread.Sleep(500);
+                    await client.SendTextMessageAsync(msg.Chat.Id, "Что вас интересует?", replyMarkup: MainMenuMzs());
+                    break;
+                case "РНС":
+                    Thread.Sleep(500);
+                    await client.SendTextMessageAsync(msg.Chat.Id, "Что вас интересует?", replyMarkup: MainMenuRns());
+                    break;
                 case "Как исправить подрез?":
                     Thread.Sleep(500);
                     await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
@@ -54,37 +62,124 @@ namespace BotCode
                     Thread.Sleep(500);
                     await client.SendTextMessageAsync(msg.Chat.Id, InsertRns);
                     break;
-                case "Позвонить наладчику":
-                    Thread.Sleep(2000);
-                    await client.SendContactAsync(
-                     chatId: e.Message.Chat.Id,
-                     phoneNumber: "+79108926865",
-                     firstName: "Максим",
-                     lastName: "Петрович");
+                //case "Позвонить наладчику":
+                //    Thread.Sleep(2000);
+                //    await client.SendContactAsync(
+                //     chatId: e.Message.Chat.Id,
+                //     phoneNumber: "+79108926865",
+                //     firstName: "Максим",
+                //     lastName: "Петрович");
+                //    Thread.Sleep(500);
+                //    await client.SendContactAsync(
+                //     chatId: e.Message.Chat.Id,
+                //     phoneNumber: "+79108926088",
+                //     firstName: "Антон",
+                //     lastName: "Сергеевич");
+                //    break;
+                case "Параметры для перевалки РНС":
                     Thread.Sleep(500);
-                    await client.SendContactAsync(
-                     chatId: e.Message.Chat.Id,
-                     phoneNumber: "+79108926088",
-                     firstName: "Антон",
-                     lastName: "Сергеевич");
+                    await client.SendTextMessageAsync(msg.Chat.Id, "Укажите тип резьбы",replyMarkup: ProductTypeChangeRns());
+                    break;
+                case "Параметры для перевалки МЗС":
+                    Thread.Sleep(500);
+                    await client.SendTextMessageAsync(msg.Chat.Id, "Укажите тип резьбы", replyMarkup: ProductTypeChangeMzs());
                     break;
                 case "Номера ремонтных служб":
                     Thread.Sleep(500);
-                    await client.SendTextMessageAsync(msg.Chat.Id, " + 7-923-442-39-12 Механники \r\n + 7-923-442-39-51 Электрики \r\n + 7-923-111-33-39 Автоматчики", replyMarkup: MainButtons());
+                    await client.SendTextMessageAsync(msg.Chat.Id, "+79234423982 Механники \r\n+79234423951 Электрики \r\n+79239113339 Автоматчики", replyMarkup: MainButtons());
                     break;
-                case "FAQ по коррекциям":
+                case "FAQ по базовым операциям РНС":
                     Thread.Sleep(500);
-                    await client.SendTextMessageAsync(msg.Chat.Id, "Выберите требую коррекцию", replyMarkup: FaqButtons());
+                    await client.SendTextMessageAsync(msg.Chat.Id, "Выберите требую коррекцию", replyMarkup: FaqButtonsRns());
                     break;
                 case "В главное меню":
                     Thread.Sleep(500);
                     await client.SendTextMessageAsync(msg.Chat.Id, "Вы в главном меню", replyMarkup: MainButtons());
                     break;
+                case "FAQ по базовым операциям МЗС":
+                    Thread.Sleep(500);
+                    await client.SendTextMessageAsync(msg.Chat.Id, "Выберите требую коррекцию", replyMarkup: FaqButtonsMzs());
+                    break;
+                case "Как скорректировать расстояние до треугольника?":
+                    Thread.Sleep(500);
+                    await client.SendTextMessageAsync(msg.Chat.Id, Mzs1);
+                    break;
+                case "Теория коррекции на премиум соединениях":
+                    Thread.Sleep(500);
+                    await client.SendTextMessageAsync(msg.Chat.Id, Mzs2);
+                    break;
+                case "Что делать если закусило муфту?":
+                    Thread.Sleep(500);
+                    await client.SendTextMessageAsync(msg.Chat.Id, Mzs3);
+                    break;
+                case "Регулировка стола":
+                    Thread.Sleep(500);
+                    await client.SendTextMessageAsync(msg.Chat.Id, Mzs4);
+                    break;
 
             }
+            //switch (msg.Text)
+            //{
+            //    case "Батресс - РНС":
+            //        Thread.Sleep(500);
+            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
+            //        await client.SendPhotoAsync(
+            //            chatId: e.Message.Chat.Id,
+            //            photo: "",
+            //            caption: "Ваш оффет",
+            //            parseMode: ParseMode.Html);
+            //        break;
+            //    case ""ОТТМ - РНС":
+            //        Thread.Sleep(500);
+            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
+            //        await client.SendPhotoAsync(
+            //            chatId: e.Message.Chat.Id,
+            //            photo: "",
+            //            caption: "Ваш оффет",
+            //            parseMode: ParseMode.Html);
+            //        break;
+            //    case "ВМЗ - 1 - РНС":
+            //        Thread.Sleep(500);
+            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
+            //        await client.SendPhotoAsync(
+            //            chatId: e.Message.Chat.Id,
+            //            photo: "",
+            //            caption: "Ваш оффет",
+            //            parseMode: ParseMode.Html);
+            //        break;
+            //    case "ОТТГ - РНС":
+            //        Thread.Sleep(500);
+            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
+            //        await client.SendPhotoAsync(
+            //            chatId: e.Message.Chat.Id,
+            //            photo: "",
+            //            caption: "Ваш оффет",
+            //            parseMode: ParseMode.Html);
+            //        break;
+            //    case "Треугольная резьба - РНС":
+            //        Thread.Sleep(500);
+            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
+            //        await client.SendPhotoAsync(
+            //            chatId: e.Message.Chat.Id,
+            //            photo: "",
+            //            caption: "Ваш оффет",
+            //            parseMode: ParseMode.Html);
+            //        break;
+            //    case "ВМЗ-4 - РНС":
+            //        Thread.Sleep(500);
+            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
+            //        await client.SendPhotoAsync(
+            //            chatId: e.Message.Chat.Id,
+            //            photo: "",
+            //            caption: "Ваш оффет",
+            //            parseMode: ParseMode.Html);
+            //        break;
+
+
+            //}
         }
 
-        private static void Answers(out string StepRns, out string StandofRns, out string TaperRns, out string InsertRns)
+        private static void Answers(out string StepRns, out string StandofRns, out string TaperRns, out string InsertRns , out string Mzs1, out string Mzs2, out string Mzs3, out string Mzs4)
         {
             StepRns = "Перейдите в экран 'Macro' найдите параметр под номером '536'" +
             " и измените его значение в зависимости от строны подреза .Если подрез находится со стороны оператора то " +
@@ -96,9 +191,14 @@ namespace BotCode
 ".Учтите что 0.05мм конусности соответсвет 0.0010мм от значения параметра, для изменения " +
 "увеличьте/убавьте данный параметр на нужное вам значение ";
             InsertRns = "Открутите прижимной винт шестигранным ключем на 5 , продуйте посадочное место под гребенку и установите новую прижав ее в обратную от шпинделя сторону";
+            Mzs1 = "Тут пока ничего нет , но скоро будет";
+            Mzs2 = "Тут пока ничего нет , но скоро будет";
+            Mzs3 = "Тут пока ничего нет , но скоро будет";
+            Mzs4 = "Тут пока ничего нет , но скоро будет";
+
         }
 
-        private static IReplyMarkup FaqButtons()
+        private static IReplyMarkup FaqButtonsRns()
         {
             return new ReplyKeyboardMarkup
             {
@@ -111,15 +211,81 @@ namespace BotCode
                 }
             };
         }
+        private static IReplyMarkup FaqButtonsMzs()
+        {
+            return new ReplyKeyboardMarkup
+            {
+                Keyboard = new List<List<KeyboardButton>>
+                {
+                    new List<KeyboardButton>{new KeyboardButton { Text = "Как скорректировать расстояние до треугольника?"}, new KeyboardButton { Text = "Теория коррекции на премиум соединениях"} } ,
+                    new List<KeyboardButton>{new KeyboardButton { Text = "Что делать если закусило муфту?"}, new KeyboardButton { Text = "Регулировка стола"} },
+                    new List<KeyboardButton>{new KeyboardButton { Text = "В главное меню"}},
+
+                }
+            };
+        }
+        private static IReplyMarkup MainMenuRns()
+        {
+            return new ReplyKeyboardMarkup
+            {
+                Keyboard = new List<List<KeyboardButton>>
+                {
+                    new List<KeyboardButton>{new KeyboardButton { Text = "FAQ по базовым операциям РНС"}},
+                    new List<KeyboardButton>{new KeyboardButton { Text = "Параметры для перевалки РНС"}},
+                    new List<KeyboardButton>{new KeyboardButton { Text = "В главное меню"}}
+
+                }
+            };
+        }
+        private static IReplyMarkup MainMenuMzs()
+        {
+            return new ReplyKeyboardMarkup
+            {
+                Keyboard = new List<List<KeyboardButton>>
+                {
+                    new List<KeyboardButton>{new KeyboardButton { Text = "FAQ по базовым операциям МЗС"}},
+                    new List<KeyboardButton>{new KeyboardButton { Text = "Параметры для перевалки МЗС"}},
+                    new List<KeyboardButton>{new KeyboardButton { Text = "В главное меню"}}
+
+                }
+            };
+        }
         private static IReplyMarkup MainButtons()
         {
             return new ReplyKeyboardMarkup
             {
                 Keyboard = new List<List<KeyboardButton>>
                 {
-                    new List<KeyboardButton> { new KeyboardButton { Text = "FAQ по коррекциям" }, new KeyboardButton { Text = "Номера ремонтных служб" } },
-                    new List<KeyboardButton> { new KeyboardButton { Text = "Позвонить наладчику" } }
+                    new List<KeyboardButton> { new KeyboardButton { Text = "РНС" }, new KeyboardButton { Text = "МЗС" } },
+                    new List<KeyboardButton> { new KeyboardButton { Text = "Позвонить наладчику" } },
+                    new List<KeyboardButton> { new KeyboardButton { Text = "Номера ремонтных служб" } }
 
+                }
+            };
+        }
+        private static IReplyMarkup ProductTypeChangeRns()
+        {
+            return new ReplyKeyboardMarkup
+            {
+                Keyboard = new List<List<KeyboardButton>>
+                {
+                    new List<KeyboardButton> { new KeyboardButton { Text = "Батресс - РНС" }, new KeyboardButton { Text = "ОТТМ - РНС" } },
+                    new List<KeyboardButton> { new KeyboardButton { Text = "ВМЗ - 1 - РНС" }, new KeyboardButton { Text = "ОТТГ - РНС" } },
+                    new List<KeyboardButton> { new KeyboardButton { Text = "Треугольная резьба - РНС" }, new KeyboardButton { Text = "ВМЗ-4 - РНС" } },
+                    new List<KeyboardButton> { new KeyboardButton { Text = "В главное меню" } }
+                }
+            };
+        }
+        private static IReplyMarkup ProductTypeChangeMzs()
+        {
+            return new ReplyKeyboardMarkup
+            {
+                Keyboard = new List<List<KeyboardButton>>
+                {
+                    new List<KeyboardButton> { new KeyboardButton { Text = "Батресс - МЗС" }, new KeyboardButton { Text = "ОТТМ - МЗС" } },
+                    new List<KeyboardButton> { new KeyboardButton { Text = "ВМЗ-1 - МЗС" }, new KeyboardButton { Text = "ОТТГ - МЗС" } },
+                    new List<KeyboardButton> { new KeyboardButton { Text = "Треугольная резьба - МЗС" }, new KeyboardButton { Text = "ВМЗ-4 - МЗС" } },
+                    new List<KeyboardButton> { new KeyboardButton { Text = "В главное меню" } }
                 }
             };
         }

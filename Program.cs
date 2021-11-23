@@ -62,20 +62,20 @@ namespace BotCode
                     Thread.Sleep(500);
                     await client.SendTextMessageAsync(msg.Chat.Id, InsertRns);
                     break;
-                //case "Позвонить наладчику":
-                //    Thread.Sleep(2000);
-                //    await client.SendContactAsync(
-                //     chatId: e.Message.Chat.Id,
-                //     phoneNumber: "+79108926865",
-                //     firstName: "Максим",
-                //     lastName: "Петрович");
-                //    Thread.Sleep(500);
-                //    await client.SendContactAsync(
-                //     chatId: e.Message.Chat.Id,
-                //     phoneNumber: "+79108926088",
-                //     firstName: "Антон",
-                //     lastName: "Сергеевич");
-                //    break;
+                case "Позвонить наладчику":
+                    Thread.Sleep(2000);
+                    await client.SendContactAsync(
+                     chatId: e.Message.Chat.Id,
+                     phoneNumber: "+79108926865",
+                     firstName: "Максим",
+                     lastName: "Петрович");
+                    Thread.Sleep(500);
+                    await client.SendContactAsync(
+                     chatId: e.Message.Chat.Id,
+                     phoneNumber: "+79108926088",
+                     firstName: "Антон",
+                     lastName: "Сергеевич");
+                    break;
                 case "Параметры для перевалки РНС":
                     Thread.Sleep(500);
                     await client.SendTextMessageAsync(msg.Chat.Id, "Укажите тип резьбы",replyMarkup: ProductTypeChangeRns());
@@ -118,67 +118,7 @@ namespace BotCode
                     break;
 
             }
-            //switch (msg.Text)
-            //{
-            //    case "Батресс - РНС":
-            //        Thread.Sleep(500);
-            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
-            //        await client.SendPhotoAsync(
-            //            chatId: e.Message.Chat.Id,
-            //            photo: "",
-            //            caption: "Ваш оффет",
-            //            parseMode: ParseMode.Html);
-            //        break;
-            //    case ""ОТТМ - РНС":
-            //        Thread.Sleep(500);
-            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
-            //        await client.SendPhotoAsync(
-            //            chatId: e.Message.Chat.Id,
-            //            photo: "",
-            //            caption: "Ваш оффет",
-            //            parseMode: ParseMode.Html);
-            //        break;
-            //    case "ВМЗ - 1 - РНС":
-            //        Thread.Sleep(500);
-            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
-            //        await client.SendPhotoAsync(
-            //            chatId: e.Message.Chat.Id,
-            //            photo: "",
-            //            caption: "Ваш оффет",
-            //            parseMode: ParseMode.Html);
-            //        break;
-            //    case "ОТТГ - РНС":
-            //        Thread.Sleep(500);
-            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
-            //        await client.SendPhotoAsync(
-            //            chatId: e.Message.Chat.Id,
-            //            photo: "",
-            //            caption: "Ваш оффет",
-            //            parseMode: ParseMode.Html);
-            //        break;
-            //    case "Треугольная резьба - РНС":
-            //        Thread.Sleep(500);
-            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
-            //        await client.SendPhotoAsync(
-            //            chatId: e.Message.Chat.Id,
-            //            photo: "",
-            //            caption: "Ваш оффет",
-            //            parseMode: ParseMode.Html);
-            //        break;
-            //    case "ВМЗ-4 - РНС":
-            //        Thread.Sleep(500);
-            //        await client.SendTextMessageAsync(msg.Chat.Id, StepRns);
-            //        await client.SendPhotoAsync(
-            //            chatId: e.Message.Chat.Id,
-            //            photo: "",
-            //            caption: "Ваш оффет",
-            //            parseMode: ParseMode.Html);
-            //        break;
-
-
-            //}
         }
-
         private static void Answers(out string StepRns, out string StandofRns, out string TaperRns, out string InsertRns , out string Mzs1, out string Mzs2, out string Mzs3, out string Mzs4)
         {
             StepRns = "Перейдите в экран 'Macro' найдите параметр под номером '536'" +
